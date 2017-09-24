@@ -82,9 +82,9 @@ namespace PydgnBot
             }
         }
 
-        public static Task<bool> BotMessage(string message, string conversationID, string serviceType)
+        public static async Task<bool> BotMessage(string message, string conversationID, string serviceType)
         {
-            
+            return true;
         }
     }
 
