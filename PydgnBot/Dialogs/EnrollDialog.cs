@@ -25,12 +25,14 @@ namespace PydgnBot.Dialogs
             {
                 await context.PostAsync("Your username is Invalid.Please enter one without spaces or the @ symbol");
                 await StartAsync(context);
+                context.EndConversation("");
             }
             else if (await Program.MakeUser(userName, context.Activity.Conversation.Id, "messenger") == false)
                 {
                 //username is already taken
                 await context.PostAsync("The username is already taken. Please enter a different username.");
                 await StartAsync(context);
+                context.EndConversation("");
             }
             //
             // context.Activity.Conversation.Id

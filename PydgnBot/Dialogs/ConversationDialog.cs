@@ -29,7 +29,6 @@ namespace PydgnBot.Dialogs
             {
                 await context.PostAsync("Sorry, there's a problem with the message. Please try again.");
                 StartAsync(context);
-                context.EndConversation("");
             }
             else
             {
