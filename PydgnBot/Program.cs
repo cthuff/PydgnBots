@@ -35,7 +35,6 @@ namespace PydgnBot
             var uri = "http://serveymcserverface.com/user";
 
             HttpResponseMessage response;
-            HttpResponseMessage checkDB;
 
             var body = $"userName={username}&conversationID={conversationID}&serviceType={serviceType}";
             // Request body
@@ -48,9 +47,6 @@ namespace PydgnBot
 
 
             }
-
-            System.Diagnostics.Debug.WriteLine(response.StatusCode);
-            System.Console.WriteLine(response.Content);
             return response.IsSuccessStatusCode;
         }
 
@@ -85,5 +81,13 @@ namespace PydgnBot
                 return JObject.Parse("");
             }
         }
+
+        public static Task<bool> BotMessage(string message, string conversationID, string serviceType)
+        {
+            
+        }
     }
+
+    
+
 }
