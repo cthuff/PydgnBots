@@ -29,12 +29,13 @@ namespace PydgnBot
         public static async Task<bool> MakeUser(string username, string conversationID, string serviceType)
         {
             var client = new HttpClient();
-           // var queryString = HttpUtility.ParseQueryString(string.Empty);
+            // var queryString = HttpUtility.ParseQueryString(string.Empty);
 
             // Request parameters
             var uri = "http://serveymcserverface.com/user";
 
             HttpResponseMessage response;
+            HttpResponseMessage checkDB;
 
             var body = $"userName={username}&conversationID={conversationID}&serviceType={serviceType}";
             // Request body
@@ -43,9 +44,9 @@ namespace PydgnBot
             using (var content = new ByteArrayContent(byteData))
             {
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-                //response = await client.PostAsync(uri, content);
-                response = client.GetAsync(requestUri: "http://serveymcserverface.com/user").Result;
-                
+                response = await client.PostAsync(uri, content);
+
+
             }
 
             System.Diagnostics.Debug.WriteLine(response.StatusCode);
@@ -53,7 +54,7 @@ namespace PydgnBot
             return response.IsSuccessStatusCode;
         }
 
-        public static async Task<JObject> SendMessage(string message, string conversationID, string serviceType)
+        public static async Task<JObject> UserMessage(string message, string conversationID, string serviceType)
         {
             var client = new HttpClient();
             // var queryString = HttpUtility.ParseQueryString(string.Empty);
@@ -70,8 +71,8 @@ namespace PydgnBot
             using (var content = new ByteArrayContent(byteData))
             {
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-                //response = await client.PostAsync(uri, content);
-                response = client.GetAsync(requestUri: "http://serveymcserverface.com/user").Result;
+                response = await client.PostAsync(uri, content);
+                //response = client.GetAsync(requestUri: "http://serveymcserverface.com/message").Result;
             }
 
             if (response.IsSuccessStatusCode)
@@ -85,6 +86,4 @@ namespace PydgnBot
             }
         }
     }
-}
-    
 }

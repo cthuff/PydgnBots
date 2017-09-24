@@ -24,22 +24,23 @@ namespace PydgnBot.Dialogs
             if (userName.Contains("@") || userName.Contains(" ") || userName.ToUpper().Equals("PYDGN"))
             {
                 await context.PostAsync("Your username is Invalid.Please enter one without spaces or the @ symbol");
-                StartAsync(context);
+                await StartAsync(context);
             }
             else if (await Program.MakeUser(userName, context.Activity.Conversation.Id, "messenger") == false)
                 {
                 //username is already taken
                 await context.PostAsync("The username is already taken. Please enter a different username.");
-                StartAsync(context);
+                await StartAsync(context);
             }
             //
             // context.Activity.Conversation.Id
 
             // check with the backend if unique
             else {        
-                context.PostAsync($"Cool! Your new username is '@{userName}'. When you send a message, format it with  \"@username message...\""); 
+                context.PostAsync($"Cool! Your new username is '@{userName}'. When you send a message, format it with  \"@username message...\"");
+                context.Done(context);
             }
-            context.Done(context);
+            
         }
     }
 }

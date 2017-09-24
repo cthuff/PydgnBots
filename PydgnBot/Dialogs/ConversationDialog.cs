@@ -22,9 +22,7 @@ namespace PydgnBot.Dialogs
         {
             var Message = await result;
 
-            JObject resp = await Program.SendMessage(Message, context.Activity.Conversation.Id, "Craig");
-
-            var fromUser 
+            JObject resp = await Program.UserMessage(Message, context.Activity.Conversation.Id, "Craig");
 
             // context.Activity.Conversation.Id
             if (resp.HasValues == false)
@@ -40,7 +38,7 @@ namespace PydgnBot.Dialogs
             }
 
             context.Done(context);
-            throw new NotImplementedException();
+            
         }
     }
 }
