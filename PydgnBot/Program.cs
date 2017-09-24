@@ -84,7 +84,32 @@ namespace PydgnBot
 
         public static async Task<bool> BotMessage(string message, string conversationID, string serviceType)
         {
-            return true;
+            var client = new HttpClient();
+            // var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+            // Request parameters
+            var uri = "https://pydgnbot.azurewebsites.net/api/messages/v3/conversations/{conversationID}/activities";
+
+            HttpResponseMessage response;
+
+            var body = $"text={message}&type=message";
+            // Request body
+            byte[] byteData = Encoding.UTF8.GetBytes(body);
+
+            using (var content = new ByteArrayContent(byteData))
+            {
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                response = await client.PostAsync(uri, content);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
